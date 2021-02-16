@@ -1,5 +1,8 @@
+import { REGISTER } from 'api/apiHandler';
 import { useState } from 'react';
 import './style.scss';
+
+const { URL, METHOD } = REGISTER;
 
 const RegisterForm = () => {
   const [username, setUsername] = useState('');
@@ -27,15 +30,26 @@ const RegisterForm = () => {
     && emailRegex.test(email)
   );
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     if (isSubmitConditionValid) {
       event.preventDefault();
     }
-    console.log({
+    const registerData = {
       username,
       email,
       password,
+    };
+
+    const response = await fetch(URL, {
+      method: METHOD,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(registerData),
     });
+
+    const data = await response.json();
+    console.log(data);
   };
 
   return (
