@@ -1,17 +1,10 @@
-import { REGISTER } from 'api/apiHandler';
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { fetchRegisterRequest, fetchRegisterSuccess, fetchRegisterFailure } from 'state/user/userActions';
-import errorMessages from 'utils/errorUtils';
 import './style.scss';
 
-const { URL, METHOD } = REGISTER;
-
-const RegisterForm = () => {
+const RegisterForm = ({ handleRegistration }) => {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const registerDispatch = useDispatch();
 
   const handleChangeUsername = (event) => {
     setUsername(event.target.value);
@@ -34,40 +27,15 @@ const RegisterForm = () => {
     && emailRegex.test(email)
   );
 
-  const fetchRegister = () => async (dispatch) => {
-    dispatch(fetchRegisterRequest());
-    const registerData = {
-      username,
-      email,
-      password,
-    };
-
-    const response = await fetch(URL, {
-      method: METHOD,
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(registerData),
-    });
-
-    const data = await response.json();
-
-    if (data.error) {
-      dispatch(fetchRegisterFailure(errorMessages(data)));
-    } else {
-      const user = {
-        username: data.user.username,
-        email: data.user.email,
-        token: data.jwt,
-      };
-      dispatch(fetchRegisterSuccess(user));
-    }
-  };
-
   const handleSubmit = async (event) => {
     if (isSubmitConditionValid) {
       event.preventDefault();
-      registerDispatch(fetchRegister());
+      const userData = {
+        username,
+        email,
+        password,
+      };
+      handleRegistration(userData);
     }
   };
 

@@ -5,7 +5,6 @@ const registerInitialState = {
   user: {
     username: '',
     email: '',
-    token: '',
   },
   error: '',
 };
@@ -18,6 +17,7 @@ const registerReducer = (state = registerInitialState, action) => {
       return {
         ...state,
         loading: true,
+        error: '',
       };
     case FETCH_REGISTER_SUCCESS:
       return {
