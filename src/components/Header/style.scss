@@ -1,0 +1,9 @@
+.Header {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+
+  &__title {
+    font-size: 1.8rem;
+  }
+}
