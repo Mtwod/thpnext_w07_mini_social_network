@@ -1,10 +1,12 @@
+const BASE_URL = 'http://localhost:1337';
+
 const REGISTER = {
-  URL: 'http://localhost:1337/auth/local/register',
+  URL: `${BASE_URL}/auth/local/register`,
   METHOD: 'post',
 };
 
 const CONNEXION = {
-  URL: 'http://localhost:1337/auth/local',
+  URL: `${BASE_URL}/auth/local`,
   METHOD: 'post',
 };
 
