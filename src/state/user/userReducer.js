@@ -3,11 +3,12 @@ import {
   FETCH_USER_REQUEST,
   FETCH_USER_SUCCESS,
   FETCH_USER_FROM_COOKIE,
+  USER_LOG_OUT,
 } from './userActions';
 
 const currentUserInitialState = {
   loading: false,
-  user: {
+  info: {
     username: '',
     email: '',
     description: '',
@@ -16,7 +17,7 @@ const currentUserInitialState = {
 };
 
 const currentUserReducer = (state = currentUserInitialState, action) => {
-  const { user: stateUser } = state;
+  const { info: stateInfo } = state;
   const { type, user: actionUser, error } = action;
 
   switch (type) {
@@ -30,8 +31,8 @@ const currentUserReducer = (state = currentUserInitialState, action) => {
       return {
         ...state,
         loading: false,
-        user: {
-          ...stateUser,
+        info: {
+          ...stateInfo,
           ...actionUser,
         },
       };
@@ -45,11 +46,13 @@ const currentUserReducer = (state = currentUserInitialState, action) => {
       return {
         ...state,
         loading: false,
-        user: {
-          ...stateUser,
+        info: {
+          ...stateInfo,
           ...actionUser,
         },
       };
+    case USER_LOG_OUT:
+      return currentUserInitialState;
     default:
       return state;
   }

@@ -12,4 +12,13 @@ const setAuthenticationCookie = (token) => {
   Cookies.set(Config.COOKIE_TOKEN_KEY, token);
 };
 
-export { checkAuthentication, setAuthenticationCookie, getAuthenticationCookie };
+const removeAuthenticationCookie = () => {
+  Cookies.remove(Config.COOKIE_TOKEN_KEY);
+};
+
+export {
+  checkAuthentication,
+  setAuthenticationCookie,
+  getAuthenticationCookie,
+  removeAuthenticationCookie,
+};
