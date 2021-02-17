@@ -3,15 +3,15 @@ import errorMessages from 'utils/errorUtils';
 import { setAuthenticationCookie } from 'utils/cookieUtils';
 import { REGISTER } from 'api/apiHandler';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchRegisterRequest, fetchRegisterSuccess, fetchRegisterFailure } from 'state/user/userActions';
+import { fetchUserRequest, fetchUserSuccess, fetchUserFailure } from 'state/user/userActions';
 import RegisterForm from './RegisterForm';
 
 const Register = () => {
-  const globalState = useSelector((state) => state);
+  const stateUser = useSelector((state) => state);
   const registerDispatch = useDispatch();
 
   const fetchRegister = ({ username, email, password }) => async (dispatch) => {
-    dispatch(fetchRegisterRequest());
+    dispatch(fetchUserRequest());
     const registerData = {
       username,
       email,
@@ -34,7 +34,7 @@ const Register = () => {
     const data = await response.json();
 
     if (data.error) {
-      dispatch(fetchRegisterFailure(errorMessages(data)));
+      dispatch(fetchUserFailure(errorMessages(data)));
     } else {
       const user = {
         username: data.user.username,
@@ -42,7 +42,7 @@ const Register = () => {
       };
 
       setAuthenticationCookie(data.jwt);
-      dispatch(fetchRegisterSuccess(user));
+      dispatch(fetchUserSuccess(user));
     }
   };
 
@@ -53,11 +53,11 @@ const Register = () => {
   return (
     <div className="Register">
       <h1>Sign up</h1>
-      {globalState.loading && (
+      {stateUser.loading && (
         <p>SENDING REQUEST, PLEASE WAIT…</p>
       )}
-      {globalState.error && (
-        <p>{globalState.error}</p>
+      {stateUser.error && (
+        <p>{stateUser.error}</p>
       )}
       <RegisterForm handleRegistration={handleRegistration} />
     </div>

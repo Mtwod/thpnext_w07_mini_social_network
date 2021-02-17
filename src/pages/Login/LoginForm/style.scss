@@ -1,0 +1,11 @@
+.LoginForm {
+  padding: 20px;
+  display: grid;
+  grid-template-columns: auto;
+  row-gap: 20px;
+  width: 300px;
+
+  input {
+    padding: 5px;
+  }
+}

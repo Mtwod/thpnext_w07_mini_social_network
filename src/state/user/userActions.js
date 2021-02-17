@@ -1,32 +1,32 @@
 /* eslint-disable arrow-body-style */
-const FETCH_REGISTER_REQUEST = 'FETCH_REGISTER_REQUEST';
-const FETCH_REGISTER_SUCCESS = 'FETCH_REGISTER_SUCCESS';
-const FETCH_REGISTER_FAILURE = 'FETCH_REGISTER_FAILURE';
+const FETCH_USER_REQUEST = 'FETCH_USER_REQUEST';
+const FETCH_USER_SUCCESS = 'FETCH_USER_SUCCESS';
+const FETCH_USER_FAILURE = 'FETCH_USER_FAILURE';
 const FETCH_USER_FROM_COOKIE = 'FETCH_USER_FROM_COOKIE';
 
 export {
-  FETCH_REGISTER_REQUEST,
-  FETCH_REGISTER_SUCCESS,
-  FETCH_REGISTER_FAILURE,
+  FETCH_USER_REQUEST,
+  FETCH_USER_SUCCESS,
+  FETCH_USER_FAILURE,
   FETCH_USER_FROM_COOKIE,
 };
 
-const fetchRegisterRequest = () => {
+const fetchUserRequest = () => {
   return {
-    type: FETCH_REGISTER_REQUEST,
+    type: FETCH_USER_REQUEST,
   };
 };
 
-const fetchRegisterSuccess = (user) => {
+const fetchUserSuccess = (user) => {
   return {
-    type: FETCH_REGISTER_SUCCESS,
+    type: FETCH_USER_SUCCESS,
     user,
   };
 };
 
-const fetchRegisterFailure = (error) => {
+const fetchUserFailure = (error) => {
   return {
-    type: FETCH_REGISTER_FAILURE,
+    type: FETCH_USER_FAILURE,
     error,
   };
 };
@@ -39,8 +39,8 @@ const fetchUserFromCookie = (user) => {
 };
 
 export {
-  fetchRegisterRequest,
-  fetchRegisterSuccess,
-  fetchRegisterFailure,
+  fetchUserRequest,
+  fetchUserSuccess,
+  fetchUserFailure,
   fetchUserFromCookie,
 };

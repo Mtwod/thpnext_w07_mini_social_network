@@ -1,7 +1,7 @@
 import {
-  FETCH_REGISTER_FAILURE,
-  FETCH_REGISTER_REQUEST,
-  FETCH_REGISTER_SUCCESS,
+  FETCH_USER_FAILURE,
+  FETCH_USER_REQUEST,
+  FETCH_USER_SUCCESS,
   FETCH_USER_FROM_COOKIE,
 } from './userActions';
 
@@ -20,13 +20,13 @@ const currentUserReducer = (state = currentUserInitialState, action) => {
   const { type, user: actionUser, error } = action;
 
   switch (type) {
-    case FETCH_REGISTER_REQUEST:
+    case FETCH_USER_REQUEST:
       return {
         ...state,
         loading: true,
         error: '',
       };
-    case FETCH_REGISTER_SUCCESS:
+    case FETCH_USER_SUCCESS:
       return {
         ...state,
         loading: false,
@@ -35,7 +35,7 @@ const currentUserReducer = (state = currentUserInitialState, action) => {
           ...actionUser,
         },
       };
-    case FETCH_REGISTER_FAILURE:
+    case FETCH_USER_FAILURE:
       return {
         ...state,
         loading: false,

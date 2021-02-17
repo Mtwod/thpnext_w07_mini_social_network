@@ -9,10 +9,14 @@ const REGISTER = (registerData) => ({
   BODY: JSON.stringify(registerData),
 });
 
-const CONNEXION = {
+const LOGIN = (loginData) => ({
   URL: `${BASE_URL}/auth/local`,
   METHOD: 'post',
-};
+  HEADERS: {
+    'Content-Type': 'application/json',
+  },
+  BODY: JSON.stringify(loginData),
+});
 
 const OWN_PROFILE = (token) => ({
   URL: `${BASE_URL}/users/me`,
@@ -23,4 +27,4 @@ const OWN_PROFILE = (token) => ({
   },
 });
 
-export { REGISTER, CONNEXION, OWN_PROFILE };
+export { REGISTER, LOGIN, OWN_PROFILE };
