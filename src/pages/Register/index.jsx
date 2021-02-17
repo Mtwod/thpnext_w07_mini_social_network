@@ -3,8 +3,9 @@ import errorMessages from 'utils/errorUtils';
 import { setAuthenticationCookie } from 'utils/cookieUtils';
 import { REGISTER } from 'api/apiHandler';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchUserRequest, fetchUserSuccess, fetchUserFailure } from 'state/user/userActions';
+import { fetchUserRequest, fetchUserSuccess, fetchUserFailure } from 'store/user/userActions';
 import RegisterForm from './RegisterForm';
+import './style.scss';
 
 const Register = () => {
   const stateUser = useSelector((state) => state);
@@ -37,8 +38,8 @@ const Register = () => {
       dispatch(fetchUserFailure(errorMessages(data)));
     } else {
       const user = {
+        id: data.user.id,
         username: data.user.username,
-        email: data.user.email,
       };
 
       setAuthenticationCookie(data.jwt);

@@ -9,9 +9,8 @@ import {
 const currentUserInitialState = {
   loading: false,
   info: {
+    id: null,
     username: '',
-    email: '',
-    description: '',
   },
   error: '',
 };

@@ -1,6 +1,7 @@
+/* eslint-disable react/jsx-one-expression-per-line */
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { userLogOut } from 'state/user/userActions';
+import { userLogOut } from 'store/user/userActions';
 import { removeAuthenticationCookie } from 'utils/cookieUtils';
 import './style.scss';
 
@@ -22,8 +23,7 @@ const Header = () => {
       <Link to="/register">Register</Link>
       {username && (
         <div className="Header__loggedIn">
-          <p>{username}</p>
-          <button type="button" className="Header__loggedIn__logOut" onClick={handleLogOut}>Log out</button>
+          <button type="button" className="Header__loggedIn__logOut" onClick={handleLogOut}>Log out, {username}</button>
         </div>
       )}
     </div>

@@ -2,8 +2,9 @@ import { setAuthenticationCookie } from 'utils/cookieUtils';
 import { LOGIN } from 'api/apiHandler';
 import errorMessages from 'utils/errorUtils';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchUserFailure, fetchUserRequest, fetchUserSuccess } from 'state/user/userActions';
+import { fetchUserFailure, fetchUserRequest, fetchUserSuccess } from 'store/user/userActions';
 import LoginForm from './LoginForm';
+import './style.scss';
 
 const Login = () => {
   const stateUser = useSelector((state) => state);
@@ -35,8 +36,8 @@ const Login = () => {
       dispatch(fetchUserFailure(errorMessages(data)));
     } else {
       const user = {
+        id: data.user.id,
         username: data.user.username,
-        email: data.user.email,
       };
 
       setAuthenticationCookie(data.jwt);
