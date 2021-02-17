@@ -1,16 +1,23 @@
-import { FETCH_REGISTER_FAILURE, FETCH_REGISTER_REQUEST, FETCH_REGISTER_SUCCESS } from './userActions';
+import {
+  FETCH_REGISTER_FAILURE,
+  FETCH_REGISTER_REQUEST,
+  FETCH_REGISTER_SUCCESS,
+  FETCH_USER_FROM_COOKIE,
+} from './userActions';
 
-const registerInitialState = {
+const currentUserInitialState = {
   loading: false,
   user: {
     username: '',
     email: '',
+    description: '',
   },
   error: '',
 };
 
-const registerReducer = (state = registerInitialState, action) => {
-  const { type, user, error } = action;
+const currentUserReducer = (state = currentUserInitialState, action) => {
+  const { user: stateUser } = state;
+  const { type, user: actionUser, error } = action;
 
   switch (type) {
     case FETCH_REGISTER_REQUEST:
@@ -23,7 +30,10 @@ const registerReducer = (state = registerInitialState, action) => {
       return {
         ...state,
         loading: false,
-        user,
+        user: {
+          ...stateUser,
+          ...actionUser,
+        },
       };
     case FETCH_REGISTER_FAILURE:
       return {
@@ -31,9 +41,18 @@ const registerReducer = (state = registerInitialState, action) => {
         loading: false,
         error,
       };
+    case FETCH_USER_FROM_COOKIE:
+      return {
+        ...state,
+        loading: false,
+        user: {
+          ...stateUser,
+          ...actionUser,
+        },
+      };
     default:
       return state;
   }
 };
 
-export default registerReducer;
+export default currentUserReducer;

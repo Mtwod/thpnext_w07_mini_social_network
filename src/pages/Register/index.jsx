@@ -6,8 +6,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import { fetchRegisterRequest, fetchRegisterSuccess, fetchRegisterFailure } from 'state/user/userActions';
 import RegisterForm from './RegisterForm';
 
-const { URL, METHOD } = REGISTER;
-
 const Register = () => {
   const globalState = useSelector((state) => state);
   const registerDispatch = useDispatch();
@@ -20,12 +18,17 @@ const Register = () => {
       password,
     };
 
+    const {
+      URL,
+      METHOD,
+      HEADERS,
+      BODY,
+    } = REGISTER(registerData);
+
     const response = await fetch(URL, {
       method: METHOD,
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(registerData),
+      headers: HEADERS,
+      body: BODY,
     });
 
     const data = await response.json();
@@ -49,12 +52,9 @@ const Register = () => {
 
   return (
     <div className="Register">
-      <h2>Sign up</h2>
+      <h1>Sign up</h1>
       {globalState.loading && (
-        <h2>SENDING REQUEST, PLEASE WAIT</h2>
-      )}
-      {globalState.user.username && (
-        <p>You registered as {globalState.user.username}</p>
+        <p>SENDING REQUEST, PLEASE WAIT…</p>
       )}
       {globalState.error && (
         <p>{globalState.error}</p>
