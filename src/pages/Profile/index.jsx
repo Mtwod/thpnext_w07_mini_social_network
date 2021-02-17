@@ -7,9 +7,9 @@ import { useEffect } from 'react';
 import './style.scss';
 
 const Profile = () => {
-  const currentUser = useSelector((state) => (state));
-  const { info } = currentUser;
-  const { username, email, description } = info;
+  const globalState = useSelector((state) => (state));
+  const { info: currentUser } = globalState;
+  const { username, email, description } = currentUser;
   const dispatch = useDispatch();
 
   const fetchOwnProfile = async () => {
@@ -29,9 +29,8 @@ const Profile = () => {
     const data = await response.json();
 
     const user = {
+      id: data.id,
       username: data.username,
-      email: data.email,
-      description: data.description,
     };
 
     dispatch(fetchUserFromCookie(user));
