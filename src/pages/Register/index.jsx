@@ -4,11 +4,13 @@ import { setAuthenticationCookie } from 'utils/cookieUtils';
 import { REGISTER } from 'api/apiHandler';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchUserRequest, fetchUserSuccess, fetchUserFailure } from 'store/user/userActions';
+import { Redirect } from 'react-router-dom';
 import RegisterForm from './RegisterForm';
 import './style.scss';
 
 const Register = () => {
-  const stateUser = useSelector((state) => state);
+  const globalState = useSelector((state) => state);
+  const { info: currentUser, loading, error } = globalState;
   const registerDispatch = useDispatch();
 
   const fetchRegister = ({ username, email, password }) => async (dispatch) => {
@@ -54,11 +56,14 @@ const Register = () => {
   return (
     <div className="Register">
       <h1>Sign up</h1>
-      {stateUser.loading && (
+      {loading && (
         <p>SENDING REQUEST, PLEASE WAIT…</p>
       )}
-      {stateUser.error && (
-        <p>{stateUser.error}</p>
+      {error && (
+        <p>{error}</p>
+      )}
+      {currentUser.id && (
+        <Redirect to={{ pathname: '/profile' }} />
       )}
       <RegisterForm handleRegistration={handleRegistration} />
     </div>

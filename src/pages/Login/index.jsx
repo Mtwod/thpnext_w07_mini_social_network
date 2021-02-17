@@ -3,11 +3,13 @@ import { LOGIN } from 'api/apiHandler';
 import errorMessages from 'utils/errorUtils';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchUserFailure, fetchUserRequest, fetchUserSuccess } from 'store/user/userActions';
+import { Redirect } from 'react-router-dom';
 import LoginForm from './LoginForm';
 import './style.scss';
 
 const Login = () => {
-  const stateUser = useSelector((state) => state);
+  const globalState = useSelector((state) => state);
+  const { info: currentUser, loading, error } = globalState;
   const loginDispatch = useDispatch();
 
   const fetchLogin = ({ identifier, password }) => async (dispatch) => {
@@ -52,11 +54,14 @@ const Login = () => {
   return (
     <div className="Login">
       <h1 className="Login__title">Log in</h1>
-      {stateUser.loading && (
+      {loading && (
         <p>SENDING REQUEST, PLEASE WAIT…</p>
       )}
-      {stateUser.error && (
-        <p>{stateUser.error}</p>
+      {error && (
+        <p>{error}</p>
+      )}
+      {currentUser.id && (
+        <Redirect to={{ pathname: '/profile' }} />
       )}
       <LoginForm handleLogin={handleLogin} />
     </div>

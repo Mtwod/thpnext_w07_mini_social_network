@@ -6,7 +6,6 @@ import Register from 'pages/Register';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import PrivateRoute from 'routes/PrivateRoute';
 import 'style.scss';
-import { checkAuthentication, noAuthentication } from 'utils/cookieUtils';
 
 const App = () => (
   <div className="App">
@@ -16,24 +15,13 @@ const App = () => (
         <Route path="/" exact>
           <Home />
         </Route>
-        <PrivateRoute
-          path="/register"
-          condition={noAuthentication}
-          component={Register}
-          redirectionPath="/profile"
-        />
-        <PrivateRoute
-          path="/login"
-          condition={noAuthentication}
-          component={Login}
-          redirectionPath="/profile"
-        />
-        <PrivateRoute
-          path="/profile"
-          condition={checkAuthentication}
-          component={Profile}
-          redirectionPath="/login"
-        />
+        <Route path="/register">
+          <Register />
+        </Route>
+        <Route path="/login">
+          <Login />
+        </Route>
+        <PrivateRoute path="/profile" component={Profile} />
       </Switch>
     </Router>
   </div>

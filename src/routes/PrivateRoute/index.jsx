@@ -1,22 +1,22 @@
 /* eslint-disable react/jsx-props-no-spreading */
+import { useSelector } from 'react-redux';
 import { Redirect, Route } from 'react-router-dom';
 
 const PrivateRoute = (routeProps) => {
   const {
-    condition,
-    redirectionPath,
     component: Component,
     ...rest
   } = routeProps;
+  const currentUser = useSelector((state) => state.info);
 
   return (
     <Route
       {...rest}
       render={(props) => (
-        condition() ? (
+        currentUser.id ? (
           <Component {...props} />
         ) : (
-          <Redirect to={{ pathname: redirectionPath }} />
+          <Redirect to={{ pathname: '/login' }} />
         )
       )}
     />
