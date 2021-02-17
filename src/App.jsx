@@ -8,7 +8,7 @@ import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import PrivateRoute from 'routes/PrivateRoute';
-import { fetchUserFromCookie } from 'store/user/userActions';
+import { editUser } from 'store/user/userActions';
 import 'style.scss';
 import { checkAuthentication, getAuthenticationCookie } from 'utils/cookieUtils';
 
@@ -35,7 +35,7 @@ const App = () => {
 
     const user = { id, username };
 
-    dispatch(fetchUserFromCookie(user));
+    dispatch(editUser(user));
   };
 
   useEffect(() => {

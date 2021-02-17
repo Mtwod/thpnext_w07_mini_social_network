@@ -1,14 +1,14 @@
 const FETCH_USER_REQUEST = 'FETCH_USER_REQUEST';
 const FETCH_USER_SUCCESS = 'FETCH_USER_SUCCESS';
 const FETCH_USER_FAILURE = 'FETCH_USER_FAILURE';
-const FETCH_USER_FROM_COOKIE = 'FETCH_USER_FROM_COOKIE';
+const EDIT_USER = 'EDIT_USER';
 const USER_LOG_OUT = 'USER_LOG_OUT';
 
 export {
   FETCH_USER_REQUEST,
   FETCH_USER_SUCCESS,
   FETCH_USER_FAILURE,
-  FETCH_USER_FROM_COOKIE,
+  EDIT_USER,
   USER_LOG_OUT,
 };
 
@@ -26,8 +26,8 @@ const fetchUserFailure = (error) => ({
   error,
 });
 
-const fetchUserFromCookie = (user) => ({
-  type: FETCH_USER_FROM_COOKIE,
+const editUser = (user) => ({
+  type: EDIT_USER,
   user,
 });
 
@@ -39,6 +39,6 @@ export {
   fetchUserRequest,
   fetchUserSuccess,
   fetchUserFailure,
-  fetchUserFromCookie,
+  editUser,
   userLogOut,
 };

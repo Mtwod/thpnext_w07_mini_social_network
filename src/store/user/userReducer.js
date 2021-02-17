@@ -2,7 +2,7 @@ import {
   FETCH_USER_FAILURE,
   FETCH_USER_REQUEST,
   FETCH_USER_SUCCESS,
-  FETCH_USER_FROM_COOKIE,
+  EDIT_USER,
   USER_LOG_OUT,
 } from './userActions';
 
@@ -41,7 +41,7 @@ const currentUserReducer = (state = currentUserInitialState, action) => {
         loading: false,
         error,
       };
-    case FETCH_USER_FROM_COOKIE:
+    case EDIT_USER:
       return {
         ...state,
         loading: false,

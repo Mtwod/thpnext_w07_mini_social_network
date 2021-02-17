@@ -1,16 +1,16 @@
 /* eslint-disable react/jsx-one-expression-per-line */
 import { OWN_PROFILE } from 'api/apiHandler';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { getAuthenticationCookie } from 'utils/cookieUtils';
-import { fetchUserFromCookie } from 'store/user/userActions';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import './style.scss';
+import EditProfile from './EditProfile';
 
 const Profile = () => {
   const globalState = useSelector((state) => (state));
-  const { info: currentUser } = globalState;
-  const { username, email, description } = currentUser;
-  const dispatch = useDispatch();
+  const [editProfileUsername, setEditProfileUsername] = useState('');
+  const [editProfileEmail, setEditProfileEmail] = useState('');
+  const [editProfileDescription, setEditProfileDescription] = useState('');
 
   const fetchOwnProfile = async () => {
     const token = getAuthenticationCookie();
@@ -28,34 +28,43 @@ const Profile = () => {
 
     const data = await response.json();
 
-    const user = {
-      id: data.id,
+    return {
       username: data.username,
+      email: data.email,
+      description: data.description,
     };
-
-    dispatch(fetchUserFromCookie(user));
   };
 
-  useEffect(() => {
-    fetchOwnProfile();
-  }, []);
+  useEffect(async () => {
+    const {
+      username,
+      email,
+      description,
+    } = await fetchOwnProfile();
+
+    setEditProfileUsername(username);
+    setEditProfileEmail(email);
+    setEditProfileDescription(description || 'No description yet!');
+  }, [globalState]);
+
+  const handleChangeUsername = (event) => {
+    setEditProfileUsername(event.target.value);
+  };
+
+  const handleChangeDescription = (event) => {
+    setEditProfileDescription(event.target.value);
+  };
 
   return (
     <div className="Profile">
       <h1 className="Profile__title">My profile</h1>
-      <div className="Profile__info">
-        <p className="Profile__username">username: {username}</p>
-        <p className="Profile__email">email: {email}</p>
-        <p className="Profile__description">
-          description:&nbsp;
-          {!description && (
-            'No description…'
-          )}
-          {description && (
-            description
-          )}
-        </p>
-      </div>
+      <EditProfile
+        username={editProfileUsername}
+        email={editProfileEmail}
+        description={editProfileDescription}
+        handleChangeUsername={handleChangeUsername}
+        handleChangeDescription={handleChangeDescription}
+      />
     </div>
   );
 };
