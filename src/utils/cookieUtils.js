@@ -6,6 +6,11 @@ const checkAuthentication = () => {
   return false;
 };
 
+const noAuthentication = () => {
+  if (Cookies.get(Config.COOKIE_TOKEN_KEY)) return false;
+  return true;
+};
+
 const getAuthenticationCookie = () => (Cookies.get(Config.COOKIE_TOKEN_KEY));
 
 const setAuthenticationCookie = (token) => {
@@ -18,6 +23,7 @@ const removeAuthenticationCookie = () => {
 
 export {
   checkAuthentication,
+  noAuthentication,
   setAuthenticationCookie,
   getAuthenticationCookie,
   removeAuthenticationCookie,
