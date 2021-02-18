@@ -3,6 +3,7 @@ import { EDIT_PROFILE } from 'api/apiHandler';
 import { useDispatch } from 'react-redux';
 import { editUser } from 'store/user/userActions';
 import { getAuthenticationCookie } from 'utils/cookieUtils';
+import slugify from 'utils/slugify';
 
 /* eslint-disable jsx-a11y/label-has-associated-control */
 const EditProfile = (props) => {
@@ -51,6 +52,7 @@ const EditProfile = (props) => {
       const userData = {
         username,
         description,
+        slug: slugify(username),
       };
       fetchEditProfile(userData);
     }

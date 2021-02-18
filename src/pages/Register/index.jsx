@@ -5,6 +5,7 @@ import { REGISTER } from 'api/apiHandler';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchUserRequest, fetchUserSuccess, fetchUserFailure } from 'store/user/userActions';
 import { Redirect } from 'react-router-dom';
+import slugify from 'utils/slugify';
 import RegisterForm from './RegisterForm';
 import './style.scss';
 
@@ -15,10 +16,12 @@ const Register = () => {
 
   const fetchRegister = ({ username, email, password }) => async (dispatch) => {
     dispatch(fetchUserRequest());
+
     const registerData = {
       username,
       email,
       password,
+      slug: slugify(username),
     };
 
     const {
