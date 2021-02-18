@@ -94,9 +94,19 @@ const GET_USER_POSTS = (token, userId) => ({
   },
 });
 
+const DELETE_POST = (token, id) => ({
+  URL: `${BASE_URL}/posts/${id}`,
+  METHOD: 'delete',
+  HEADERS: {
+    'Content-Type': 'application/json',
+    Authorization: `Bearer ${token}`,
+  },
+});
+
 export {
   CREATE_POST,
   GET_POSTS,
   POSTS_COUNT,
   GET_USER_POSTS,
+  DELETE_POST,
 };

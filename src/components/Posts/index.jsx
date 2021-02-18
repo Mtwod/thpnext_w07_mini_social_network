@@ -100,6 +100,8 @@ const Posts = () => {
           username={post.user.username}
           text={post.text}
           createdAt={post.created_at}
+          refreshPosts={fetchPosts}
+          postId={post.id}
           key={post.id}
         />
       )))}
