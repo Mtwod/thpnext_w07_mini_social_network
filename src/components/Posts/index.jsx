@@ -95,6 +95,8 @@ const Posts = () => {
       <h2 className="Posts__title">List of posts {currentUser.username && (`(${postsCount} in total)`)}</h2>
       {posts && (posts.map((post) => (
         <Post
+          id={post.user.id}
+          slug={post.user.slug}
           username={post.user.username}
           text={post.text}
           createdAt={post.created_at}

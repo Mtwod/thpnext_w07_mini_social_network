@@ -2,6 +2,7 @@ import { OWN_PROFILE } from 'api/apiHandler';
 import Header from 'components/Header';
 import Home from 'pages/Home';
 import Login from 'pages/Login';
+import OtherProfile from 'pages/OtherProfile';
 import Profile from 'pages/Profile';
 import Register from 'pages/Register';
 import { useEffect } from 'react';
@@ -57,6 +58,10 @@ const App = () => {
             <Login />
           </Route>
           <PrivateRoute path="/profile" component={Profile} />
+          <PrivateRoute path="/user" component={OtherProfile} />
+          <Route>
+            😱 Oops… The page was not found! 😱
+          </Route>
         </Switch>
       </Router>
     </div>

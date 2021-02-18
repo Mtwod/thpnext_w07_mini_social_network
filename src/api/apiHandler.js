@@ -39,11 +39,21 @@ const EDIT_PROFILE = (token, data) => ({
   BODY: JSON.stringify(data),
 });
 
+const GET_USER = (token, id) => ({
+  URL: `${BASE_URL}/users/${id}`,
+  METHOD: 'get',
+  HEADERS: {
+    'Content-Type': 'application/json',
+    Authorization: `Bearer ${token}`,
+  },
+});
+
 export {
   REGISTER,
   LOGIN,
   OWN_PROFILE,
   EDIT_PROFILE,
+  GET_USER,
 };
 
 // POSTS
@@ -75,4 +85,18 @@ const POSTS_COUNT = (token) => ({
   },
 });
 
-export { CREATE_POST, GET_POSTS, POSTS_COUNT };
+const GET_USER_POSTS = (token, userId) => ({
+  URL: `${BASE_URL}/posts?_sort=created_at%3Adesc&user=${userId}`,
+  METHOD: 'get',
+  HEADERS: {
+    'Content-Type': 'application/json',
+    Authorization: `Bearer ${token}`,
+  },
+});
+
+export {
+  CREATE_POST,
+  GET_POSTS,
+  POSTS_COUNT,
+  GET_USER_POSTS,
+};

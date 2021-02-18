@@ -47,7 +47,6 @@ const CreatePost = ({ refreshPosts }) => {
 
   return (
     <form className="CreatePost">
-      <label className="CreatePost__title">Create a post: </label>
       <textarea className="CreatePost__input" value={value} onChange={handleChangeValue} placeholder="Write down a post" />
       <input className="CreatePost__submit" type="submit" value="Post" onClick={handleSubmit} />
       {loading && (
