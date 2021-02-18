@@ -4,7 +4,7 @@ import { GET_USER, GET_USER_POSTS } from 'api/apiHandler';
 import Config from 'config';
 import { useEffect, useState } from 'react';
 import { getAuthenticationCookie } from 'utils/cookieUtils';
-import ProfilePost from './ProfilePost';
+import OtherProfilePost from './OtherProfilePost';
 import './style.scss';
 
 const OtherProfile = () => {
@@ -89,7 +89,7 @@ const OtherProfile = () => {
       )}
       {posts.length > 0 && (
         posts.map((post) => (
-          <ProfilePost
+          <OtherProfilePost
             text={post.text}
             createdAt={post.created_at}
             key={post.id}

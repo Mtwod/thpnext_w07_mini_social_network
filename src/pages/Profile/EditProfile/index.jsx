@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import { editUser } from 'store/user/userActions';
 import { getAuthenticationCookie } from 'utils/cookieUtils';
 import slugify from 'utils/slugify';
+import './style.scss';
 
 /* eslint-disable jsx-a11y/label-has-associated-control */
 const EditProfile = (props) => {
@@ -60,7 +61,7 @@ const EditProfile = (props) => {
 
   return (
     <form className="EditProfile">
-      <label>Username: </label>
+      <label className="EditProfile__usernameTitle">Username: </label>
       <input
         className="EditProfile__username"
         type="text"
@@ -70,9 +71,10 @@ const EditProfile = (props) => {
         onChange={handleChangeUsername}
         required
       />
-      <p className="EditProfile__email">Email: {email}</p>
-      <label>Description: </label>
-      <input
+      <p className="EditProfile__emailTitle">Email:</p>
+      <p className="EditProfile__email">{email}</p>
+      <label className="EditProfile__descriptionTitle">Description: </label>
+      <textarea
         className="EditProfile__description"
         type="description"
         name="description"
@@ -81,7 +83,7 @@ const EditProfile = (props) => {
         onChange={handleChangeDescription}
         required
       />
-      <input type="submit" onClick={handleSubmit} value="Submit" />
+      <input className="EditProfile__button" type="submit" onClick={handleSubmit} value="Submit" />
     </form>
   );
 };
