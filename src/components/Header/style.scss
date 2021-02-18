@@ -2,8 +2,25 @@
   display: flex;
   justify-content: space-around;
   align-items: center;
+  height: 80px;
+  border-bottom: 2px solid var(--color-primary);
 
   &__title {
     font-size: 1.8rem;
+  }
+}
+
+button {
+  background-color: #C70524;
+  border: none;
+  color: white;
+  padding: 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+
+  &:hover {
+    background-color: #A7041F;
+    color: white;
   }
 }
