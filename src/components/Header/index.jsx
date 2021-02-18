@@ -18,11 +18,15 @@ const Header = () => {
   return (
     <div className="Header">
       <Link to="/" className="Header__title">M&C Social Network</Link>
-      <Link to="/login">Login</Link>
-      <Link to="/profile">Profile</Link>
-      <Link to="/register">Register</Link>
+      {!username && (
+        <div className="Header__public">
+          <Link to="/login" className="Header__public__link">Log in</Link>
+          <Link to="/register" className="Header__public__link">Sign up</Link>
+        </div>
+      )}
       {username && (
         <div className="Header__loggedIn">
+          <Link to="/profile" className="Header__LoggedIn__profile">Profile</Link>
           <button type="button" className="Header__loggedIn__logOut" onClick={handleLogOut}>Log out, {username}</button>
         </div>
       )}
